@@ -163,6 +163,7 @@ def main(args=None):
                 import tkinter as tk
         except ImportError:
                 os.system("savetube -h")
+                sys.exit()
 
         try:
                 from PIL import Image

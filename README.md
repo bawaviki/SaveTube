@@ -14,11 +14,11 @@ A **cross platform** front-end **GUI** as well as simple **CLI** of the popular 
 * [FFmpeg](https://ffmpeg.org/download.html) (optional, to post process video files)
 
 ## Downloads
-* [Source (.zip)](https://github.com/bawaviki/savetube-py/archive/1.0.zip)
-* [Source (.tar.gz)](https://github.com/bawaviki/savetube-py/archive/1.0.tar.gz)
-* [PyPi](https://pypi.python.org/pypi/youtube-dlg/0.4)
-* [Windows Installer](https://github.com/MrS0m30n3/youtube-dl-gui/releases/download/0.4/youtube-dl-gui-0.4-win-setup.zip)
-* [Windows Portable](https://github.com/bawaviki/savetube-py/releases/download/0.4/youtube-dl-gui-0.4-win-portable.zip)
+* [Source (.zip)](https://github.com/bawaviki/SaveTube/archive/1.0.zip)
+* [Source (.tar.gz)](https://github.com/bawaviki/SaveTube/archive/1.0.tar.gz)
+* [PyPi](https://pypi.python.org/pypi/Savetube/1.0)
+* [Windows Installer](https://github.com/bawaviki/SaveTube/releases/download/0.4/youtube-dl-gui-0.4-win-setup.zip)
+* [Windows Portable](https://github.com/bawaviki/SaveTube/releases/download/0.4/youtube-dl-gui-0.4-win-portable.zip)
 
 
 # Installation

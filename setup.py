@@ -16,6 +16,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license = "MIT",
+    python_requires='>=3',
     keywords = ['savetube', 'youtube-dl-gui', 'SavTube', 'Savetube', 'youtube-dl GUI'],
     url = "http://github.com/bawaviki/savetube",
     download_url = "https://github.com/bawaviki/savetube/archive/v_{}.tar.gz".format(__version__),
