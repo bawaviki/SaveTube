@@ -1,0 +1,6 @@
+*.pyc
+*.mo
+
+dist/
+build/
+Savetube.egg-info/

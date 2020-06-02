@@ -14,7 +14,7 @@ setup(
     author_email = "bawaviki99@gmail.com",
     description = ("Youtube-dl GUI warpper"),
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
     license = "MIT",
     keywords = ['savetube', 'youtube-dl-gui', 'SavTube', 'Savetube', 'youtube-dl GUI'],
     url = "http://github.com/bawaviki/savetube",
