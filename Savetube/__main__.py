@@ -12,6 +12,7 @@ from pyfiglet import Figlet
 from termcolor import colored, cprint
 import youtube_dl.postprocessor as ytpp
 from Savetube.ffmpeg import GetFFmpeg
+from Savetube.version import __version__
 
 
 def get_download_path():
@@ -129,15 +130,19 @@ def main(args=None):
     url = ''
     has_op = False
     try:
-        opts, args = getopt.getopt(args,"hU:",["url="])
+        opts, args = getopt.getopt(args,"vhU:",["url=", "version"])
     except getopt.GetoptError:
-        print(colored("usage: savetube [-h :help] [-U <url>] [--url <url>] for GUI mode just type savetube and hit enter.", 'red'))
+        print(" Incorrect option!\n usage: savetube [-h :help] [-v, --version :version] [-U <url>] [--url <url>] for GUI mode just type savetube and hit enter.")
         sys.exit()
     
     for opt, arg in opts:
         if opt == '-h':
             has_op = True
-            print(colored("usage: savetube [-h :help] [-U <url>] [--url <url>] for GUI mode just type savetube and hit enter.", 'red'))
+            print(" usage: savetube [-h :help] [-v, --version :version] [-U <url>] [--url <url>] for GUI mode just type savetube and hit enter.")
+            sys.exit()
+        elif opt in ("-v", "--version"):
+            has_op = True
+            print("Current version: {}".format(__version__))
             sys.exit()
         elif opt in ("-U", "--url"):
             has_op = True
