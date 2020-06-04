@@ -4,3 +4,15 @@
 dist/
 build/
 Savetube.egg-info/
+# IntelliJ related files
+.idea
+*.iml
+
+Savetube/__pycache__
+Savetube/GUI/__pycache__
+
+tmp/
+venv/
+
+# VS Code related files
+.vscode

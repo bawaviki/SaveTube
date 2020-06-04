@@ -1,15 +1,13 @@
-from tkinter import *
-from tkinter.ttk import *
 import tkinter as tk
 from tkinter import ttk
 import re
 import subprocess
 import threading
 from tkinter.filedialog import askdirectory
-import json
+
 try:
-    from PIL import Image
-    from PIL import ImageTk
+    from PIL import Image # noqa
+    from PIL import ImageTk # noqa
 except ImportError:
     subprocess.call('pip3 install Pillow', shell=True)
 import io
@@ -23,19 +21,21 @@ from Savetube.youtubedltojson import YoutubedlTojson
 from Savetube.GUI.downloadvideo import DownloadVideo
 import os
 import webbrowser
-        
+import sys
+
 
 def get_download_path():
-        """Returns the default downloads path for linux or windows"""
-        if os.name == 'nt':
-            import winreg
-            sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
-            downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
-            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
-                location = winreg.QueryValueEx(key, downloads_guid)[0]
-            return location
-        else:
-            return os.path.join(os.path.expanduser('~'), 'Downloads')
+    """Returns the default downloads path for linux or windows"""
+    if os.name == 'nt':
+        import winreg
+        sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+        downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
+            location = winreg.QueryValueEx(key, downloads_guid)[0]
+        return location
+    else:
+        return os.path.join(os.path.expanduser('~'), 'Downloads')
+
 
 class DownloadDetails:
 
@@ -46,25 +46,25 @@ class DownloadDetails:
         self.ext = ext
         self.op = op
         self.subs = subs
-        self.progress = Progressbar()
-        self.master = Frame()
+        self.progress = ttk.Progressbar()
+        self.master = tk.Frame()
         self.size = tk.Label()
         self.rate = tk.Label()
         self.eta = tk.Label()
-        self.window =None
+        self.window = None
 
     def gettitle(self):
         return self.title
 
     def Downloadfile(self):
         # def startd():
-        videod = DownloadVideo(self.window, self.url, self.op, self.vformat, self.ext, self.subs, self.updateStatus)
+        DownloadVideo(self.window, self.url, self.op, self.vformat, self.ext, self.subs, self.updateStatus)
 
         # threading.Thread(target=startd).start()
 
     def downloadView(self, master, window):
         self.master = master
-        self.window =window
+        self.window = window
         df = tk.Frame(master, bd=5, height=40, width=900)
         df.pack()
         titlet = tk.Label(df, text=self.title, anchor="w")
@@ -72,7 +72,7 @@ class DownloadDetails:
         self.size = tk.Label(df, text="unknown")
         self.rate = tk.Label(df, text="0.0KiB/s")
         self.eta = tk.Label(df, text="99:99")
-        self.progress = Progressbar(df, orient=HORIZONTAL, mode='determinate')
+        self.progress = ttk.Progressbar(df, orient=tk.HORIZONTAL, mode='determinate')
         titlet.place(relwidth=0.40)
         self.progress.place(relx=0.42, relwidth=0.15)
         self.size.place(relx=0.65)
@@ -116,7 +116,7 @@ class App:
         self.iswindowGenerated = 0
 
         # Icon and title
-        self.icon = PhotoImage(file=os.path.dirname(os.path.abspath(__file__))+"/icon.png")
+        self.icon = tk.PhotoImage(file=os.path.dirname(os.path.abspath(__file__)) + "/icon.png")
         self.master.iconphoto(False, self.icon)
         self.master.title("SaveTube")
 
@@ -147,9 +147,9 @@ class App:
 
         self.dtext = tk.StringVar()
         self.dtext.set("Click to download")
-        self.downloadprocess = tk.Label(self.master, text="Click to download......", relief=SUNKEN, anchor=W)
+        self.downloadprocess = tk.Label(self.master, text="Click to download......", relief=tk.SUNKEN, anchor=tk.W)
 
-        self.vtitle = StringVar()
+        self.vtitle = tk.StringVar()
 
         # frames of master
         self.topframe = tk.Frame(self.master, pady=5, padx=2, bd=5, height=300)
@@ -161,15 +161,15 @@ class App:
         # Queue
         self.scrollF = tk.Frame(self.bottomframe)
         self.scrollb = tk.Scrollbar(self.scrollF)
-        self.scrollb.pack(side=RIGHT, fill=Y)
+        self.scrollb.pack(side=tk.RIGHT, fill=tk.Y)
         self.queue = tk.Listbox(self.scrollF, selectmode='multiple')
 
         # Radiobox
-        self.subs = IntVar()
+        self.subs = tk.IntVar()
 
         # resolution
         # Create a Tkinter variable
-        self.defaultheight = StringVar(self.master)
+        self.defaultheight = tk.StringVar(self.master)
 
         # Dictionary with options
         # self.defaultheight.set('720')  # set the default option
@@ -178,14 +178,14 @@ class App:
 
         # formats
         # Create a Tkinter variable
-        self.defaultformat = StringVar(self.master)
+        self.defaultformat = tk.StringVar(self.master)
 
         # Dictionary with options
         self.formats = ttk.Combobox(self.topframe, textvariable=self.defaultformat)
         self.formats.config(width=30)
 
         # folder chooser
-        self.chosenfolder = StringVar(self.master)
+        self.chosenfolder = tk.StringVar(self.master)
         self.chosenfolder.set("{}".format(get_download_path()))
         self.folder_choser_frame = tk.Frame(self.bottomframe)
         self.folder = tk.Entry(self.folder_choser_frame, textvariable=self.chosenfolder, width=30)
@@ -193,20 +193,16 @@ class App:
 
         # style
         self.styleb = ttk.Style()
-        self.styleb.configure('W.TButton', font=
-        ('calibri', 10, 'bold', 'underline'),
-                              foreground='red')
+        self.styleb.configure('W.TButton', font=('calibri', 10, 'bold', 'underline'), foreground='red')
         self.styleb.map('W.TButton', foreground=[('active', '!disabled', 'green')], background=[('active', 'black')])
 
         # add Button
         self.addbutton = ttk.Button(self.topframe, text="Add To List", style="W.TButton", command=self.addtask)
 
-
     def on_closing(self):
-            if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                self.master.destroy()
-                sys.exit(0)        
-
+        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+            self.master.destroy()
+            sys.exit(0)
 
     def bar(self):
         # self.master.overrideredirect(False)
@@ -214,6 +210,7 @@ class App:
         self.master.resizable(0, 0)
         self.btn.grid_forget()
         self.url.grid_forget()
+
         # self.loading = Loading(self.master)
         # self.loading.show()
         # root.geometry("320x480")
@@ -221,37 +218,35 @@ class App:
         # self.progress.start()
 
         def linkTojson():
-        	self.loading = Loading(self.master)
-        	self.loading.show()
-        	jsonp = YoutubedlTojson(self.url.get())
-        	imgurl = jsonp.getImgurl()
-	        title = jsonp.getTitle()
-	        self.vtitle = title
-	        site = jsonp.getExtractor()
-	        description = jsonp.getDescription()
-	        uploader = jsonp.getUploader()
-	        formatsh = jsonp.getFormatsHeight()
-	        formatse = jsonp.getFormatsExt()
-	        if isinstance(formatsh, tuple):
-	            self.defaultheight.set(formatsh[1])
-	        else:
-	            self.defaultheight.set(formatsh)
-	        self.defaultformat.set(formatse[1])
-	        self.formats['values'] = jsonp.getFormatsExt()
-	        self.heights['values'] = jsonp.getFormatsHeight()
-	        # self.progress.stop()
-	        # self.progress.pack_forget()
-	        self.mainWindow(imgurl, title, uploader, description, site)
-	        # self.setTopframe(imgurl, title)
-	        # self.setBottom()
+            self.loading = Loading(self.master)
+            self.loading.show()
+            jsonp = YoutubedlTojson(self.url.get())
+            imgurl = jsonp.getImgurl()
+            title = jsonp.getTitle()
+            self.vtitle = title
+            site = jsonp.getExtractor()
+            description = jsonp.getDescription()
+            uploader = jsonp.getUploader()
+            formatsh = jsonp.getFormatsHeight()
+            formatse = jsonp.getFormatsExt()
+            if isinstance(formatsh, tuple):
+                self.defaultheight.set(formatsh[1])
+            else:
+                self.defaultheight.set(formatsh)
+            self.defaultformat.set(formatse[1])
+            self.formats['values'] = jsonp.getFormatsExt()
+            self.heights['values'] = jsonp.getFormatsHeight()
+            # self.progress.stop()
+            # self.progress.pack_forget()
+            self.mainWindow(imgurl, title, uploader, description, site)
+            # self.setTopframe(imgurl, title)
+            # self.setBottom()
 
         threading.Thread(target=linkTojson).start()
-       
 
-    
     def pickfolder(self):
         print("youtube-dl-tkinter: Choosing File Destination")
-        Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
+        tk.Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
         filename = askdirectory()  # show an "Open" dialog box and return the path to the selected file
         print(filename)
         self.chosenfolder.set(filename)
@@ -259,31 +254,31 @@ class App:
     def addtask(self):
         video_converter = ytpp.FFmpegPostProcessor.get_versions()
         if not (video_converter['ffmpeg'] or video_converter['avconv']):
-                if messagebox.askokcancel("FFmpeg", "FFmpeg needed download now?"):
-                    self.getFFmpeg()
-        
+            if messagebox.askokcancel("FFmpeg", "FFmpeg needed download now?"):
+                self.getFFmpeg()
+
         print("youtube-dl-tkinter: Youtube Url Added to queue!")
         listitem = "{}.      {}".format(self.queue.size() + 1, self.vtitle)
         ddetails = DownloadDetails(self.url.get(), self.vtitle, self.heights.get(), self.formats.get(),
                                    self.chosenfolder.get(), self.subs.get())
         self.videos[listitem] = ddetails
-        self.queue.insert(END, listitem)
+        self.queue.insert(tk.END, listitem)
         self.master.update()
 
     def mainWindow(self, imgurl, title, uploader, description, site):
         # ***** Main Menu *****
 
-        menu = Menu(self.master)
+        menu = tk.Menu(self.master)
         self.master.config(menu=menu)
 
-        subMenu = Menu(menu, tearoff=False)
+        subMenu = tk.Menu(menu, tearoff=False)
         menu.add_cascade(label="File", menu=subMenu)
         subMenu.add_command(label="Add task", command=self.addNewUrl)
-        subMenu.add_command(label="New...", command=self.doNothing )
+        subMenu.add_command(label="New...", command=self.doNothing)
         subMenu.add_separator()
         subMenu.add_command(label="Exit", command=lambda: sys.exit(0))
 
-        editMenu = Menu(menu, tearoff=False)
+        editMenu = tk.Menu(menu, tearoff=False)
         menu.add_cascade(label="Edit", menu=editMenu)
         editMenu.add_command(label="Help", command=self.help)
 
@@ -301,11 +296,11 @@ class App:
         # ***** Status Bar *****
 
         # status = Label(root, text="Preparing to do nothing...", relief=SUNKEN, anchor=W)
-        self.downloadprocess.pack(side=BOTTOM, fill=X)
+        self.downloadprocess.pack(side=tk.BOTTOM, fill=tk.X)
         self.master.geometry("900x600+280+80")
         self.master.resizable(0, 0)
-        self.topframe.pack(fill=X)
-        self.bottomframe.pack(fill=X)
+        self.topframe.pack(fill=tk.X)
+        self.bottomframe.pack(fill=tk.X)
         self.setTopframe(imgurl, title, uploader, description, site)
         if not self.iswindowGenerated:
             self.setBottom()
@@ -323,13 +318,13 @@ class App:
         tk_image = ImageTk.PhotoImage(pil_image)
         label = tk.Label(self.topframe, image=tk_image, width=pil_image.width, height=pil_image.height)
         label.image = tk_image
-        titlelabel = tk.Message(self.topframe, text=title, relief=RIDGE, width=500, bg="red", fg="white")
+        titlelabel = tk.Message(self.topframe, text=title, relief=tk.RIDGE, width=500, bg="red", fg="white")
         uploaderlabel = tk.Label(self.topframe, text="Uploaded by: {}".format(uploader))
         sitelabel = tk.Label(self.topframe, text="Site: {}".format(site))
         subtitle = tk.Label(self.topframe, text="With Subtitles (if available)")
         subyes = tk.Radiobutton(self.topframe, text="Yes", value=1, variable=self.subs)
         subno = tk.Radiobutton(self.topframe, text="No", value=0, variable=self.subs)
-        descriptionlabel = tk.Label(self.topframe, text=description)
+        # descriptionlabel = tk.Label(self.topframe, text=description)
         # label.pack()
         # titlelabel.pack()
         label.place(x=0, y=0)
@@ -350,7 +345,7 @@ class App:
         toplabel = tk.Label(self.bottomframe, text="No.         Title", anchor="w")
         dbtn = tk.Button(self.bottomframe, text="Download", fg="green", command=self.download)
         dbtn.place(x=750, y=225)
-        img = ImageTk.PhotoImage(Image.open(os.path.dirname(os.path.abspath(__file__))+"/folder.png"))
+        img = ImageTk.PhotoImage(Image.open(os.path.dirname(os.path.abspath(__file__)) + "/folder.png"))
         folderimg = tk.Label(self.bottomframe, image=img)
         folderimg.image = img
         toplabel.place(x=0, y=0, relwidth=1)
@@ -361,11 +356,11 @@ class App:
         self.scrollb.config(command=self.queue.yview)
         # self.queue.insert(END, "No.         Title")
         folderimg.place(x=20, y=220)
-        self.folder.pack(side=LEFT)
-        self.folderchoser.pack(side=LEFT)
+        self.folder.pack(side=tk.LEFT)
+        self.folderchoser.pack(side=tk.LEFT)
         self.folder_choser_frame.place(x=60, y=228)
         # self.folderchoser.place(x=(s+30), y=225)
-        
+
         # self.bottomframe.pack(side=BOTTOM, fill=X)
 
     def download(self):
@@ -379,7 +374,7 @@ class App:
             dwindow.grab_set()
             dwindow.focus_force()
             lframe = tk.Frame(dwindow, height=20)
-            lframe.pack(fill=X)
+            lframe.pack(fill=tk.X)
             titleText = tk.Label(lframe, text="TITLE")
             processText = tk.Label(lframe, text="PROCESS")
             sizeText = tk.Label(lframe, text="SIZE")
@@ -391,7 +386,7 @@ class App:
             rateText.place(relx=0.75)
             timeText.place(relx=0.85)
             scrollframe = ScrollableFrame(dwindow)
-            scrollframe.pack(fill=BOTH)
+            scrollframe.pack(fill=tk.BOTH)
 
             def flash(event):
                 dwindow.bell()
@@ -406,7 +401,7 @@ class App:
                 #                   flash_time)
                 # info.cbSize = sizeof(info)
                 # windll.user32.FlashWindowEx(byref(info))
-            
+
             dwindow.bind("<FocusOut>", flash)
             for i in self.queue.curselection():
                 self.videos[self.queue.get(i)].downloadView(scrollframe.scrollable_frame, dwindow)
@@ -428,7 +423,7 @@ class App:
             # print("{}".format(status)[36:45])
 
     def doNothing(self):
-        l = Loading(self.master)
+        Loading(self.master)
 
     # def getClipboardText(self):
     #     win32clipboard.OpenClipboard()
@@ -439,25 +434,23 @@ class App:
     def getFFmpeg(self):
 
         def flash(event):
-                dwindow.bell()
-                dwindow.focus_force()
-    	
-        if os.name == 'nt':
-	        dwindow = tk.Toplevel(self.master)
-	        dwindow.title("Downloading FFmpeg......")
-	        dwindow.iconphoto(False,self.icon)
-	        dwindow.bind("<FocusOut>", flash)
-                # Gets both half the screen width/height and window width/height
-	        positionRight = int(self.master.winfo_screenwidth() / 2 - 150)
-	        positionDown = int(self.master.winfo_screenheight() / 2)
-	        dwindow.protocol("WM_DELETE_WINDOW", lambda: "pass")
-	        dwindow.geometry("300x60+{}+{}".format(positionRight, positionDown))
-	        dwindow.grab_set()
-	        dwindow.focus_force()
-	        progress = ttk.Progressbar(dwindow, orient=tk.HORIZONTAL, mode='determinate', length=200)
-	        progress.pack(pady=20)
+            dwindow.bell()
+            dwindow.focus_force()
 
-            
+        if os.name == 'nt':
+            dwindow = tk.Toplevel(self.master)
+            dwindow.title("Downloading FFmpeg......")
+            dwindow.iconphoto(False, self.icon)
+            dwindow.bind("<FocusOut>", flash)
+            # Gets both half the screen width/height and window width/height
+            positionRight = int(self.master.winfo_screenwidth() / 2 - 150)
+            positionDown = int(self.master.winfo_screenheight() / 2)
+            dwindow.protocol("WM_DELETE_WINDOW", lambda: "pass")
+            dwindow.geometry("300x60+{}+{}".format(positionRight, positionDown))
+            dwindow.grab_set()
+            dwindow.focus_force()
+            progress = ttk.Progressbar(dwindow, orient=tk.HORIZONTAL, mode='determinate', length=200)
+            progress.pack(pady=20)
 
         def updatestatus(status):
             progress['value'] = int(status)
@@ -468,13 +461,14 @@ class App:
             dwindow.destroy()
 
         def start_downloading():
-            getFF = GetFFmpeg(updatestatus,onComplete)
+            GetFFmpeg(updatestatus, onComplete)
 
         threading.Thread(target=start_downloading).start()
 
     def addNewUrl(self):
         dwindow = tk.Toplevel(self.master)
-        dwindow.geometry("+{}+{}".format((self.master.winfo_x()+dwindow.winfo_reqwidth()), (self.master.winfo_y()+int(self.master.winfo_reqheight()/2))))
+        dwindow.geometry("+{}+{}".format((self.master.winfo_x() + dwindow.winfo_reqwidth()),
+                                         (self.master.winfo_y() + int(self.master.winfo_reqheight() / 2))))
         dwindow.focus_force()
         dwindow.grab_set()
         addurl = tk.Entry(dwindow, width=50, bd=5)
@@ -504,8 +498,9 @@ class App:
             #                   flash_time)
             # info.cbSize = sizeof(info)
             # windll.user32.FlashWindowEx(byref(info))
-        
+
         dwindow.bind("<FocusOut>", flash)
 
-    def help(self):
+    @staticmethod
+    def help():
         webbrowser.open('https://github.com/bawaviki/savetube', new=2)

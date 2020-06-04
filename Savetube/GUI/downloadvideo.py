@@ -1,8 +1,5 @@
-import subprocess
-import threading
-from tkinter import *
-import json
 from subprocess import Popen, PIPE
+
 
 class DownloadVideo:
     def __init__(self, master, videourl, destination, height, vformat, subs, func):
@@ -37,7 +34,7 @@ class DownloadVideo:
             print(path[10:None])
 
     def run(self, master, command):
-        process = Popen(command, stdout=PIPE, shell=True, stderr=PIPE, universal_newlines=TRUE)
+        process = Popen(command, stdout=PIPE, shell=True, stderr=PIPE, universal_newlines=True)
         while True:
             line = process.stdout.readline().rstrip()
             if not line:

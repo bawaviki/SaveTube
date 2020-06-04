@@ -1,5 +1,4 @@
 from urllib.request import urlopen
-import urllib.request
 import os
 import sys
 
@@ -19,7 +18,8 @@ class GetFFmpeg:
         os.system("apt-get install ffmpeg -y")
 
     def download_ffmpeg_windows(self):
-        with open(os.path.dirname(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..",".."))) + "/ffmpeg.exe", "wb") as f:
+        with open(os.path.dirname(
+                os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))) + "/ffmpeg.exe", "wb") as f:
             response = urlopen("https://github.com/bawaviki/static-files/raw/master/ffmpeg.exe")
             data_read = self.chunk_read(response, report_hook=self.chunk_report)
             f.write(data_read)
@@ -47,7 +47,7 @@ class GetFFmpeg:
     def chunk_report(self, bytes_so_far, chunk_size, total_size):
         percent = float(bytes_so_far) / total_size
         percent = round(percent * 100, 2)
-        if self.status != None:
+        if self.status is not None:
             self.status(percent)
         os.system('cls')
         sys.stdout.write("Downloaded %d of %d bytes (%0.2f%%)\r" %
@@ -55,6 +55,6 @@ class GetFFmpeg:
 
         if bytes_so_far >= total_size:
             sys.stdout.write('\n')
-            if self.completed != None:
+            if self.completed is not None:
                 self.completed()
             # self.dwindow.protocol("WM_DELETE_WINDOW", lambda: self.dwindow.destroy())

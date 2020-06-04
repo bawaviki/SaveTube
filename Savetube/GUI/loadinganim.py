@@ -2,6 +2,7 @@ from .gif2canvas import MyLabel
 import tkinter as tk
 import os
 
+
 class Loading:
     def __init__(self, master):
         self.lframe = tk.Toplevel(master, bg="white")
@@ -9,10 +10,12 @@ class Loading:
         # Gets both half the screen width/height and window width/height
         self.positionRight = int(master.winfo_rootx())
         self.positionDown = int(master.winfo_rooty())
-        self.anim = MyLabel(self.lframe, os.path.dirname(os.path.abspath(__file__))+"/loading.gif")
+        self.anim = MyLabel(self.lframe, os.path.dirname(os.path.abspath(__file__)) + "/loading.gif")
 
     def show(self):
-        self.lframe.geometry("{}x{}+{}+{}".format(self.master.winfo_width(), self.master.winfo_height(), self.positionRight, self.positionDown))
+        self.lframe.geometry(
+            "{}x{}+{}+{}".format(self.master.winfo_width(), self.master.winfo_height(), self.positionRight,
+                                 self.positionDown))
         self.lframe.grab_set()
         self.lframe.focus_force()
         self.lframe.overrideredirect(True)

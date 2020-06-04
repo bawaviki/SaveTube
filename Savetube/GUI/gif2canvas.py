@@ -1,17 +1,18 @@
-from tkinter import *
+import tkinter as tk
 from PIL import Image, ImageTk
 
 
-class MyLabel(Label):
-    def __init__(self, master, filename):
+class MyLabel(tk.Label):
+    def __init__(self, master, filename, **kw):
+        super().__init__(master, **kw)
         im = Image.open(filename)
-        seq =  []
+        seq = []
         try:
             while 1:
                 seq.append(im.copy())
-                im.seek(len(seq)) # skip to next frame
+                im.seek(len(seq))  # skip to next frame
         except EOFError:
-            pass # we're done
+            pass  # we're done
 
         try:
             self.delay = im.info['duration']
@@ -21,7 +22,7 @@ class MyLabel(Label):
         first = seq[0].convert('RGBA')
         self.frames = [ImageTk.PhotoImage(first)]
 
-        Label.__init__(self, master, image=self.frames[0], bg="white")
+        tk.Label.__init__(self, master, image=self.frames[0], bg="white")
 
         temp = seq[0]
         for image in seq[1:]:
