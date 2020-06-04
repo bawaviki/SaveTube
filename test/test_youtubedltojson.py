@@ -1,8 +1,7 @@
 from Savetube.youtubedltojson import YoutubedlTojson
-import pytest
-
 
 jsonp = YoutubedlTojson("https://www.youtube.com/watch?v=JycDuXzwwx0")
+
 
 class Test_youtubedltojson:
 
