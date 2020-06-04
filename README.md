@@ -1,4 +1,4 @@
-# SaveTube
+# SaveTube ![Python application](https://github.com/bawaviki/SaveTube/workflows/Python%20application/badge.svg)
 A **cross platform** front-end **GUI** as well as simple **CLI** of the popular [youtube-dl](https://rg3.github.io/youtube-dl/) media downloader written in tkinter. [Supported sites](https://rg3.github.io/youtube-dl/supportedsites.html)
 
 - [REQIREMENTS](#Requirements)
@@ -17,8 +17,8 @@ A **cross platform** front-end **GUI** as well as simple **CLI** of the popular 
 * [Source (.zip)](https://github.com/bawaviki/SaveTube/archive/1.0.zip)
 * [Source (.tar.gz)](https://github.com/bawaviki/SaveTube/archive/1.0.tar.gz)
 * [PyPi](https://pypi.python.org/pypi/Savetube/1.0)
-* [Windows Installer](https://github.com/bawaviki/SaveTube/releases/download/0.4/youtube-dl-gui-0.4-win-setup.zip)
-* [Windows Portable](https://github.com/bawaviki/SaveTube/releases/download/0.4/youtube-dl-gui-0.4-win-portable.zip)
+* [Windows Installer](https://github.com/bawaviki/SaveTube/releases/download/1.0/savetube-win-setup.exe)
+* [Windows Portable](https://github.com/bawaviki/SaveTube/releases/download/1.0/savetube-win-portable.zip)
 
 
 # Installation
@@ -42,11 +42,11 @@ A **cross platform** front-end **GUI** as well as simple **CLI** of the popular 
 
 # OPTIONS
 * ## For CLI
-```python
-        -h,     --help                       Print this help text and exit.
-        -v,     --version                    Print program version and exit.
-        -U,     --url                        Provide the url to progam to work.
-```    
+```shell
+        -h,     --help           Print this help text and exit.
+        -v,     --version        Print program version and exit.
+        -U,     --url            Provide the url to progam to work.
+```      
 * ## For GUI
 
     *__Just type savetube and hit enter. A small window will apear, paste url and see the magic.__*
