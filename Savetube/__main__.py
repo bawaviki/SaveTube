@@ -122,7 +122,7 @@ class CliApp:
                       'green' if self.video_converter['avconv'] else 'red'), end="\t\t")
         cprint("by: bawaviki", 'white', 'on_grey', attrs=['blink', 'bold'])
 
-
+# flake8: noqa: C901
 def main(args=None):
     args = sys.argv[1:]
     url = ''
