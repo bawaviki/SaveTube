@@ -12,7 +12,7 @@ setup(
     version = __version__,
     author = "bawaviki",
     author_email = "bawaviki99@gmail.com",
-    description = ("Youtube-dl GUI warpper"),
+    description = ("Youtube-dl GUI Wrapper"),
     long_description=long_description,
     long_description_content_type='text/markdown',
     license = "MIT",

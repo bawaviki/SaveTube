@@ -467,6 +467,7 @@ class App:
 
     def addNewUrl(self):
         dwindow = tk.Toplevel(self.master)
+        dwindow.iconphoto(False, self.icon)
         dwindow.geometry("+{}+{}".format((self.master.winfo_x() + dwindow.winfo_reqwidth()),
                                          (self.master.winfo_y() + int(self.master.winfo_reqheight() / 2))))
         dwindow.focus_force()
