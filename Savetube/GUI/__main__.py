@@ -204,8 +204,10 @@ class App:
             self.master.destroy()
             sys.exit(0)
 
-    def bar(self):
+    def bar(self, vurl=None):
         # self.master.overrideredirect(False)
+        if vurl is None:
+            vurl = self.url.get();
         self.master.geometry("900x600+280+80")
         self.master.resizable(0, 0)
         self.btn.grid_forget()
@@ -220,7 +222,7 @@ class App:
         def linkTojson():
             self.loading = Loading(self.master)
             self.loading.show()
-            jsonp = YoutubedlTojson(self.url.get())
+            jsonp = YoutubedlTojson(vurl)
             imgurl = jsonp.getImgurl()
             title = jsonp.getTitle()
             self.vtitle = title
@@ -478,8 +480,8 @@ class App:
         addurl.grid(row=2, column=0, pady=10, padx=5)
 
         def remove():
+            self.bar(addurl.get())
             dwindow.destroy()
-            self.bar()
 
         addbtn = tk.Button(dwindow, text="Go", bg="red", fg="white", pady=10, padx=5, command=remove, width=10,
                            activebackground="green",
