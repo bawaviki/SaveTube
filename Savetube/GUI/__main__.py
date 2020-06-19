@@ -19,6 +19,7 @@ from Savetube.GUI.loadinganim import Loading
 from Savetube.GUI.scrollableframe import ScrollableFrame
 from Savetube.youtubedltojson import YoutubedlTojson
 from Savetube.GUI.downloadvideo import DownloadVideo
+from Savetube.GUI.updater import downloadupdate
 import os
 import webbrowser
 import sys
@@ -308,6 +309,7 @@ class App:
             self.setBottom()
         self.iswindowGenerated = 1
         self.loading.stop()
+        self.updater()
 
     def setTopframe(self, imgurl, title, uploader, description, site):
         fin = urlopen(imgurl)
@@ -507,3 +509,6 @@ class App:
     @staticmethod
     def help():
         webbrowser.open('https://github.com/bawaviki/savetube', new=2)
+
+    def updater(self):
+        threading.Thread(target=downloadupdate(self.master)).start()
