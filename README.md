@@ -1,7 +1,7 @@
 # SaveTube ![Python application](https://github.com/bawaviki/SaveTube/workflows/Python%20application/badge.svg)
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/) [![GitHub stars](https://img.shields.io/github/stars/bawaviki/SaveTube)](https://github.com/bawaviki/SaveTube/stargazers) [![GitHub forks](https://img.shields.io/github/forks/bawaviki/SaveTube?color=red)](https://github.com/bawaviki/SaveTube/network) [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fbawaviki.github.io%2FSaveTube%2F)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fbawaviki%2FSaveTube%2F)
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Savetube?color=yellow) ![PyPI](https://img.shields.io/pypi/v/SaveTube?color=orange) [![GitHub license](https://img.shields.io/github/license/bawaviki/SaveTube)](https://github.com/bawaviki/SaveTube/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/savetube/month)](https://pepy.tech/project/savetube/month)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Savetube?color=yellow) ![PyPI](https://img.shields.io/pypi/v/SaveTube?color=orange) [![GitHub license](https://img.shields.io/github/license/bawaviki/SaveTube)](https://github.com/bawaviki/SaveTube/blob/master/LICENSE) [![Downloads](https://pepy.tech/badge/savetube/month)](https://pepy.tech/project/savetube/month) [![GitHub issues](https://img.shields.io/github/issues/bawaviki/SaveTube?color=%235E6BB8)](https://github.com/bawaviki/SaveTube/issues)
 
 A **cross platform** front-end **GUI** as well as simple **CLI** of the popular [youtube-dl](https://rg3.github.io/youtube-dl/) media downloader written in tkinter. [Supported sites](https://rg3.github.io/youtube-dl/supportedsites.html)
 
@@ -18,18 +18,18 @@ A **cross platform** front-end **GUI** as well as simple **CLI** of the popular 
 * [FFmpeg](https://ffmpeg.org/download.html) (optional, to post process video files)
 
 ## Downloads
-* [Source (.zip)](https://github.com/bawaviki/SaveTube/archive/1.0.zip)
-* [Source (.tar.gz)](https://github.com/bawaviki/SaveTube/archive/1.0.tar.gz)
-* [PyPi](https://pypi.python.org/pypi/Savetube/1.0)
-* [Windows Installer](https://github.com/bawaviki/SaveTube/releases/download/1.0/savetube-win-setup.exe)
-* [Windows Portable](https://github.com/bawaviki/SaveTube/releases/download/1.0/savetube-win-portable.zip)
+* [Source (.zip)](https://github.com/bawaviki/SaveTube/archive/1.1.zip)
+* [Source (.tar.gz)](https://github.com/bawaviki/SaveTube/archive/1.1.tar.gz)
+* [PyPi](https://pypi.python.org/pypi/Savetube/)
+* [Windows Installer](https://github.com/bawaviki/SaveTube/releases/download/1.1/savetube-win-setup.exe)
+* [Windows Portable](https://github.com/bawaviki/SaveTube/releases/download/1.1/savetube-win-portable.zip)
 
 
 # Installation
 
 * ### Install From Source
 1. Download & extract the source
-2. Change directory into *Savetube-1.0*
+2. Change directory into *Savetube-1.1*
 3. Run `python setup.py install`
 
 * ### Install PyPi
@@ -54,7 +54,7 @@ A **cross platform** front-end **GUI** as well as simple **CLI** of the popular 
 * ## For GUI
 
     *__Just type savetube and hit enter. A small window will apear, paste url and see the magic.__*
-```
+```bash
         $ savetube
 ```
 
